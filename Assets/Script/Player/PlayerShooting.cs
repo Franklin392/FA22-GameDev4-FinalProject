@@ -74,7 +74,7 @@ public class PlayerShooting : MonoBehaviour
 
             if(rayHit.collider.CompareTag("Enemy"))
             {
-                rayHit.collider.GetComponent<ShootingAi>().TakeDamage(damage);
+                //rayHit.collider.GetComponent<ShootingAi>().TakeDamage(damage);
             }
         }
 
