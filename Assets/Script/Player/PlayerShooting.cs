@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerShooting : MonoBehaviour
     public LayerMask whatIsEnemy;
 
     //Graphics
+    public GameObject muzzleFlash, bulletHoleGraphic;
+    public TextMeshProUGUI text;
     
     private void Awake()
     {
@@ -29,6 +32,8 @@ public class PlayerShooting : MonoBehaviour
     private void Update()
     {
         MyInput();
+
+        text.SetText(bulletsLeft + "/" + magazineSize);
     }
     private void MyInput()
     {
@@ -82,7 +87,11 @@ public class PlayerShooting : MonoBehaviour
         bulletsShot--;
         Invoke("ResetShot", timeBetweenShooting);
 
-        if(bulletsShot>0 && bulletsLeft >0)
+        //Graphics
+        Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
+        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+
+        if (bulletsShot>0 && bulletsLeft >0)
         {
             Invoke("Shoot", timeBetweenShots);
         }
