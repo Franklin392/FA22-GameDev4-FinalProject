@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ammo
   - Adrenaline Pack
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - PlayerHands
   - 
   - 
-  - 
+  - enemy
   - 
   - 
   - 

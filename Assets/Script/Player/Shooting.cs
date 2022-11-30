@@ -17,6 +17,8 @@ public class Shooting : MonoBehaviour
     int bulletsLeft, bulletsShot;
     //bool
     bool shooting, readyToShoot, reloading;
+
+    bool FullAuto, SemiAuto;
     //Reference
     public Camera fpsCam;
     public Transform attackPoint;
@@ -28,11 +30,17 @@ public class Shooting : MonoBehaviour
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
 
+    //ShootSound
+    public AudioSource Shot;
+    public AudioClip Bullet;
+
+    public float fireRate, nextFire;
     private void Awake()
     {
         bulletsLeft = magazineSize;
 
         readyToShoot = true;
+        FullAuto = false;
     }
 
     private void Update()
@@ -46,20 +54,59 @@ public class Shooting : MonoBehaviour
         }
     }
     private void MyInput()
-    {   
-        //Check if allowed to hold down button and take corresponding input
-        if (allowButtonHold) shooting = Input.GetKeyDown(KeyCode.Mouse0);
-        else shooting = Input.GetKey(KeyCode.Mouse0);
+    {
+        ////Check if allowed to hold down button and take corresponding input
+        //if (allowButtonHold) shooting = Input.GetKeyDown(KeyCode.Mouse0) && FullAuto == true;
 
+        ////shooting = Input.GetKey(KeyCode.Mouse0)
+
+        //else
+        //{
+        //    shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        //}
+
+        
+        //Switch mode
+        if(Input.GetKeyDown(KeyCode.X))
+        {    
+            if(FullAuto == true)
+            {
+                FullAuto = false;
+                Debug.Log("Switch to SemiAuto");
+
+            }
+            else
+            {
+                FullAuto = true;
+                Debug.Log("Switch to fullauto");
+            }
+            
+            
+        }
+        
         //Shooting
-        if(readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (/*readyToShoot && shooting &&*/ FullAuto == false && !reloading && bulletsLeft > 0)
         {
-            //Set bullets shot to 0
-            bulletsShot = 0;
-            Shoot();
+            if(Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                //Set bullets shot to 0
+                bulletsShot = 0;
+                Shoot();
+            }
+            
+        }
+        if (/*readyToShoot && shooting &&*/ FullAuto == true && !reloading && bulletsLeft > 0)
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                //Set bullets shot to 0
+                bulletsShot = 0;
+                Shoot();
+            }
+
         }
         //Reload
-        if(Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading )
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading )
         {
             Reload();
         }
@@ -76,6 +123,7 @@ public class Shooting : MonoBehaviour
         //RAYCAST finding hit position
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
         RaycastHit hit;
+
         //Check if ray hits something
         Vector3 targetPoint;
         if(Physics.Raycast(ray,out hit))
@@ -89,21 +137,31 @@ public class Shooting : MonoBehaviour
 
         //Calculate direction from a attackPoint TO TARGETpOINT
         Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+
         //Calculate spread
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
 
         //Calculate new directoin with spread
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //
+        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0);
 
         //Instantiate bullet
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
-        //Rotate bullet to shoot direction
-        currentBullet.transform.forward = directionWithSpread.normalized;
 
-        //Add forces to bullet
-        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
-        currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
+        Shot.PlayOneShot(Bullet);
+        GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+
+            //Rotate bullet to shoot direction
+            currentBullet.transform.forward = directionWithSpread.normalized;
+
+            //Add forces to bullet
+            currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+            currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
+        
+            
+        //GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
+
+        
+
         //Instantiate muzzle flash
         if(muzzleFlash != null)
         {
