@@ -55,7 +55,12 @@ public class Shooting : MonoBehaviour
     }
     private void Update()
     {
-        MyInput();
+        
+        if (Time.timeScale >= 1f) // Time.deltaTime <= 0.0f
+        {
+            MyInput();
+        }
+        
        
         //Set ammo display
         if (ammunitionDisplay != null)
