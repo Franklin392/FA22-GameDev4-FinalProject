@@ -11,9 +11,15 @@ public class PlayerHealth : MonoBehaviour
     public float chipSpeed = 2f;
     public Image frontHealthBar;
     public Image backHealthBar;
+
+
+    public GameObject GameOver;
     void Start()
     {
         health = maxHealth;
+
+        Time.timeScale = 1f;
+        GameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,14 +28,20 @@ public class PlayerHealth : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        //if(Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    TakeDamage(Random.Range(5, 10));
+        //}
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    //RestoreHealth(Random.Range(5, 10));
+        //    RestoreHealth(2);
+        //}
+
+        if(health <= 0)
         {
-            TakeDamage(Random.Range(5, 10));
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //RestoreHealth(Random.Range(5, 10));
-            RestoreHealth(2);
+            GameOver.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
     public void UpdateHealthUI()
@@ -77,4 +89,17 @@ public class PlayerHealth : MonoBehaviour
         health += healAmount;
         lerpTimer = 0f;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bomb")
+        {
+            TakeDamage(3);
+        }
+        if (other.gameObject.tag == "Health")
+        {
+            RestoreHealth(60);
+            Debug.Log("Get Back Health");
+        }
+    }
+
 }
