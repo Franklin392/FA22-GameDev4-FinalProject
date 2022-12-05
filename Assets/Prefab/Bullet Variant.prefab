@@ -9,11 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1097197732294350, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
       propertyPath: m_Name
-      value: Bullet
+      value: Bullet Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097197732294350, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1097197732294350, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097197732294350, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
+      propertyPath: m_TagString
+      value: bullet
       objectReference: {fileID: 0}
     - target: {fileID: 4536269987052944, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
       propertyPath: m_RootOrder
@@ -33,15 +41,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4536269987052944, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.191
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4536269987052944, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.446
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4536269987052944, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.502
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4536269987052944, guid: 2794c9c3d328b024284e7e7ca00891e7, type: 3}
       propertyPath: m_LocalRotation.w

@@ -11,7 +11,7 @@ public class Shooting : MonoBehaviour
     //Gun stats
     public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
 
-    public int magazineSize, bulletsPreTap;
+    public int magazineSize, bulletsPreTap, magazineTotal, PMAG;
     public bool allowButtonHold;
 
     int bulletsLeft, bulletsShot;
@@ -22,6 +22,8 @@ public class Shooting : MonoBehaviour
     //Reference
     public Camera fpsCam;
     public Transform attackPoint;
+    public Transform muzzlePoint;
+
 
     //bug fixing
     public bool allowInvoke = true;
@@ -35,22 +37,39 @@ public class Shooting : MonoBehaviour
     public AudioClip Bullet;
 
     public float fireRate, nextFire;
+
+    //Gun animate
+    public SCARanimation SCAR;
     private void Awake()
     {
         bulletsLeft = magazineSize;
 
         readyToShoot = true;
         FullAuto = false;
+        shooting = true;
+        
     }
-
+    private void Start()
+    {
+        PMAG = 0;
+    }
     private void Update()
     {
         MyInput();
-
+       
         //Set ammo display
-        if(ammunitionDisplay != null)
+        if (ammunitionDisplay != null)
         {
-            ammunitionDisplay.SetText(bulletsLeft / bulletsPreTap + "/" + magazineSize / bulletsPreTap);
+            ammunitionDisplay.SetText(bulletsLeft / bulletsPreTap + "/" + magazineTotal / bulletsPreTap);
+        }
+        
+        if(magazineTotal <= 0)
+        {
+            reloading = false;
+        }
+        else
+        {
+            reloading = true;
         }
     }
     private void MyInput()
@@ -85,7 +104,7 @@ public class Shooting : MonoBehaviour
         }
         
         //Shooting
-        if (/*readyToShoot && shooting &&*/ FullAuto == false && !reloading && bulletsLeft > 0)
+        if (/*readyToShoot && shooting &&*/ shooting == true  && bulletsLeft > 0)
         {
             if(Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -95,31 +114,40 @@ public class Shooting : MonoBehaviour
             }
             
         }
-        if (/*readyToShoot && shooting &&*/ FullAuto == true && !reloading && bulletsLeft > 0)
+        //if (/*readyToShoot && shooting &&*/ FullAuto == true && !reloading && bulletsLeft > 0)
+        //{
+        //    if (Input.GetKey(KeyCode.Mouse0))
+        //    {
+        //        //Set bullets shot to 0
+        //        bulletsShot = 0;
+        //        Shoot();
+        //    }
+
+        //}
+
+        //Reload
+        //按弹夹换弹
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && reloading == true )
         {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                //Set bullets shot to 0
-                bulletsShot = 0;
-                Shoot();
-            }
+            SCAR.animator.SetTrigger("Rechange");
+            PMAG = magazineSize - bulletsLeft;
+            Reload();
 
         }
-        //Reload
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading )
+        //automatic reload when no ammo， 自动没子弹换弹
+        if(  bulletsLeft <= 0 && reloading == true)
         {
+            SCAR.animator.SetTrigger("Rechange");
+            PMAG = magazineSize - bulletsLeft;
             Reload();
-        }
-        //automatic reload when no ammo
-        if(readyToShoot && shooting && !reloading && bulletsLeft <= 0)
-        {
-            Reload();
+            
         }
     }
     private void Shoot()
     {
         readyToShoot = false;
-
+        //animation
+        SCAR.animator.SetTrigger("Shot");
         //RAYCAST finding hit position
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
         RaycastHit hit;
@@ -165,7 +193,7 @@ public class Shooting : MonoBehaviour
         //Instantiate muzzle flash
         if(muzzleFlash != null)
         {
-            Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+            Instantiate(muzzleFlash, muzzlePoint.position, Quaternion.identity);
         }
         bulletsLeft--;
         bulletsShot++;
@@ -187,13 +215,38 @@ public class Shooting : MonoBehaviour
         allowInvoke = true;
     }
     private void Reload()
-    {
-        reloading = true;
-        Invoke("ReloadFinished", reloadTime);
-    }
-    private void ReloadFinished()
-    {
+    {   
+        
+        
+        //Invoke("ReloadFinished", reloadTime);
+
         bulletsLeft = magazineSize;
-        reloading = false;
+
+        
+
+        if (bulletsLeft == 0)
+        {
+            magazineTotal -= magazineSize;
+        }
+        if (bulletsLeft > 0)
+        {
+           
+
+            magazineTotal -= PMAG;
+        }
+
     }
+    //private void ReloadFinished() //只记录弹夹
+    //{
+        
+    //    if (bulletsLeft == 0)
+    //    {
+    //        magazineTotal -= magazineSize;
+    //    }
+    //    if(bulletsLeft >= 0)
+    //    {
+    //        magazineTotal -= PMAG -= bulletsLeft;
+    //    }
+        
+    //}
 }

@@ -12,6 +12,9 @@ public class PlayerMotor : MonoBehaviour
     public float gravity;
 
     public float jumpHeight;
+    //Gun animate
+    public SCARanimation SCAR;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -21,6 +24,7 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         isGrounded = controller.isGrounded;//
+
     }
     public void ProcessMove(Vector2 input) //reieve input for InputManager and apply for character controller
     {
@@ -40,6 +44,17 @@ public class PlayerMotor : MonoBehaviour
 
         controller.Move(playerVelocity * Time.deltaTime);
         Debug.Log(playerVelocity.y);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = 10;
+            
+
+        }
+        else
+        {
+            speed = 5;
+        }
     }
     public void Jump()
     {

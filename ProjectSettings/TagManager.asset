@@ -7,6 +7,9 @@ TagManager:
   - Ammo
   - Adrenaline Pack
   - enemy
+  - bullet
+  - EnemyAttack
+  - Girls
   layers:
   - Default
   - TransparentFX
