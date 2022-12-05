@@ -503,8 +503,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.41181904, y: 0.5540069, z: 0.5357656}
-  m_Center: {x: -0.67918116, y: 0.022588266, z: 0.23211727}
+  m_Size: {x: 0.65299875, y: 0.7948113, z: 0.53576565}
+  m_Center: {x: -0.79976577, y: 0.14299037, z: 0.23211734}
 --- !u!114 &1345266751405900226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,8 +609,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3062446, y: 0.4488383, z: 1}
-  m_Center: {x: -0.7730047, y: 0.06627251, z: 0.000000024093756}
+  m_Size: {x: 0.30624455, y: 0.6665528, z: 0.6885121}
+  m_Center: {x: -0.77300453, y: 0.1751298, z: -0.15574504}
 --- !u!1 &1324822658588008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,6 +1339,8 @@ GameObject:
   - component: {fileID: 95058629782987864}
   - component: {fileID: 3801707307741661054}
   - component: {fileID: 6546788149212380560}
+  - component: {fileID: 7827009992447756243}
+  - component: {fileID: 151371362750173678}
   m_Layer: 0
   m_Name: Fat_Zombie 1
   m_TagString: Untagged
@@ -1426,6 +1428,35 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &7827009992447756243
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853314855081812}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7492983, y: 2.5522192, z: 1}
+  m_Center: {x: -0.038727682, y: 0.77610624, z: 0}
+--- !u!54 &151371362750173678
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853314855081812}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1866039069110316
 GameObject:
   m_ObjectHideFlags: 0
