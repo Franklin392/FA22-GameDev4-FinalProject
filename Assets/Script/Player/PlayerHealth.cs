@@ -20,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
 
         Time.timeScale = 1f;
         GameOver.SetActive(false);
+        Cursor.visible = false;
+
     }
 
     // Update is called once per frame
@@ -42,6 +44,8 @@ public class PlayerHealth : MonoBehaviour
         {
             GameOver.SetActive(true);
             Time.timeScale = 0f;
+            Cursor.visible = true;
+
         }
     }
     public void UpdateHealthUI()
