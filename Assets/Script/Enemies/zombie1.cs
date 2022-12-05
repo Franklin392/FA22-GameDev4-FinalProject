@@ -15,6 +15,7 @@ public class zombie1 : MonoBehaviour
     //distance ¼ì²â
     public float dist;//distance
     public float MaxDistance;
+    public float ChaseDistance;
     public Transform Player;
 
     //Health
@@ -24,7 +25,7 @@ public class zombie1 : MonoBehaviour
     public float DieTime;
     public enum enemyState
     {
-        ChaseNow,Attack,Die,LoseHealth
+        ChaseNow,Attack,Die,LoseHealth,Stop
     }
     void Start()
     {
@@ -56,6 +57,12 @@ public class zombie1 : MonoBehaviour
             case enemyState.LoseHealth:
                 LoseHealth();
                 break;
+
+            case enemyState.Stop:
+                Stop();
+                break;
+
+
         }
 
         if (dist >= MaxDistance)
@@ -73,6 +80,12 @@ public class zombie1 : MonoBehaviour
             currentState = enemyState.Attack;
         }
 
+
+        if(dist >= MaxDistance && dist > ChaseDistance)
+        {
+            currentState = enemyState.Stop;
+        }
+
         if(Health <= 0)
         {
             currentState = enemyState.Die;
@@ -80,6 +93,9 @@ public class zombie1 : MonoBehaviour
     }
     public void ChaseNow()
     {
+
+        thisNavMeshAgent.isStopped = false;
+
         GameObject[] Player = GameObject.FindGameObjectsWithTag("Player");
         GameObject targetBObject = Player[0];
         Debug.Log(" chasing player now ");
@@ -126,6 +142,13 @@ public class zombie1 : MonoBehaviour
     {
         Health -= injury;
     }
+
+    public void Stop()
+    {
+        thisNavMeshAgent.isStopped = true;
+        animator.SetTrigger("Stop");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "bullet")

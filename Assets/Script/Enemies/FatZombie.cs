@@ -14,6 +14,7 @@ public class FatZombie : MonoBehaviour
     //distance ¼ì²â
     public float dist;//distance
     public float MaxDistance;
+    public float ChaseDistance;
     public Transform Player;
 
     //Health
@@ -23,7 +24,7 @@ public class FatZombie : MonoBehaviour
     public float DieTime;
     public enum enemyState
     {
-        ChaseNow, Attack, Die, LoseHealth
+        ChaseNow, Attack, Die, LoseHealth, Stop
     }
     void Start()
     {
@@ -55,6 +56,10 @@ public class FatZombie : MonoBehaviour
             case enemyState.LoseHealth:
                 LoseHealth();
                 break;
+
+            case enemyState.Stop:
+                Stop();
+                break;
         }
 
         if (dist >= MaxDistance)
@@ -71,6 +76,11 @@ public class FatZombie : MonoBehaviour
             currentState = enemyState.Attack;
         }
 
+        if (dist >= MaxDistance && dist > ChaseDistance)
+        {
+            currentState = enemyState.Stop;
+        }
+
         if (Health <= 0)
         {
             currentState = enemyState.Die;
@@ -78,6 +88,8 @@ public class FatZombie : MonoBehaviour
     }
     public void ChaseNow()
     {
+        thisNavMeshAgent.isStopped = false;
+
         GameObject[] Player = GameObject.FindGameObjectsWithTag("Player");
         GameObject targetBObject = Player[0];
         Debug.Log(" chasing player now ");
@@ -123,6 +135,12 @@ public class FatZombie : MonoBehaviour
     public void LoseHealth()
     {
         Health -= injury;
+    }
+
+    public void Stop()
+    {
+        thisNavMeshAgent.isStopped = true;
+        animator.SetTrigger("Stop");
     }
 
 

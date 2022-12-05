@@ -454,6 +454,7 @@ MonoBehaviour:
   currentState: 0
   dist: 0
   MaxDistance: 6
+  ChaseDistance: 15
   Player: {fileID: 0}
   Health: 20
   injury: 2

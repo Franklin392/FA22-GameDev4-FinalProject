@@ -23,7 +23,7 @@ public class FlyingGirl1 : MonoBehaviour
     public float DieTime;
     public enum friendlyState
     {
-        ChaseNow, Attack, Die, LoseHealth
+        ChaseNow, Attack, Die, LoseHealth,Stop
     }
     void Start()
     {
@@ -51,31 +51,38 @@ public class FlyingGirl1 : MonoBehaviour
             case friendlyState.LoseHealth:
                 LoseHealth();
                 break;
+
+            case friendlyState.Stop:
+                Stop();
+                break;
         }
 
         if (Health <= 0)
         {
             currentState = friendlyState.Die;
         }
+
+        if (dist <= MaxDistance)
+        {
+            currentState = friendlyState.Stop;
+            Debug.Log(" Girl no more chase BOY ");
+
+        }
+        else
+        {
+            currentState = friendlyState.ChaseNow;
+        }
     }
     public void ChaseNow()
     {
+        thisNavMeshAgent.isStopped = false;
         GameObject[] Player = GameObject.FindGameObjectsWithTag("Player");
         GameObject targetBObject = Player[0];
         Debug.Log(" chasing player now ");
         thisNavMeshAgent.SetDestination(targetBObject.transform.position);
 
         animator.SetTrigger("Walk");
-        if (dist <= MaxDistance)
-        {
-            thisNavMeshAgent.isStopped = true;
-            Debug.Log(" Girl no more chase BOY ");
-
-        }
-        else
-        {
-            thisNavMeshAgent.isStopped = false;
-        }
+       
 
     }
     public void Attack()
@@ -89,7 +96,11 @@ public class FlyingGirl1 : MonoBehaviour
     {
         Health -= injury;
     }
-
+    public void Stop()
+    {
+        thisNavMeshAgent.isStopped = true;
+        animator.SetTrigger("Stand");
+    }
     public void Die()
     {
         Debug.Log("girl DIE");
