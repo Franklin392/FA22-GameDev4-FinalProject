@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 8372543209996925544}
   - component: {fileID: 8372543209996925545}
   - component: {fileID: 5732336150212351318}
+  - component: {fileID: 8706105083965522544}
   m_Layer: 0
   m_Name: Zombie1
   m_TagString: Untagged
@@ -420,8 +421,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.9492302, z: 0.53182435}
-  m_Center: {x: 0, y: 1.0035557, z: -0.010616025}
+  m_Size: {x: 0.85856056, y: 1.2688638, z: 0.53182435}
+  m_Center: {x: -0.023201626, y: 0.6633721, z: -0.010616025}
 --- !u!54 &8372543209996925545
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -451,6 +452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  bodyCollider: {fileID: 8372543209996925544}
+  headCollider: {fileID: 8706105083965522544}
   currentState: 0
   dist: 0
   MaxDistance: 6
@@ -458,7 +461,21 @@ MonoBehaviour:
   Player: {fileID: 0}
   Health: 20
   injury: 2
+  headinjury: 5
   DieTime: 5
+--- !u!65 &8706105083965522544
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372543209996925546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5170633, y: 0.61600053, z: 1}
+  m_Center: {x: -0.018964043, y: 1.6180024, z: 0}
 --- !u!1 &8372543210067556668
 GameObject:
   m_ObjectHideFlags: 0

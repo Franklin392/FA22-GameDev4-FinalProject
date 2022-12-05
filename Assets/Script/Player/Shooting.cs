@@ -9,14 +9,14 @@ public class Shooting : MonoBehaviour
     //bullet force
     public float shootForce,upwardForce;
     //Gun stats
-    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
+    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots, reloadDuration;
 
     public int magazineSize, bulletsPreTap, magazineTotal, PMAG;
     public bool allowButtonHold;
 
     int bulletsLeft, bulletsShot;
     //bool
-    bool shooting, readyToShoot, reloading;
+    bool shooting, readyToShoot, reloading, reloadAnimationIsPlaying;
 
     bool FullAuto, SemiAuto;
     //Reference
@@ -109,7 +109,7 @@ public class Shooting : MonoBehaviour
         }
         
         //Shooting
-        if (/*readyToShoot && shooting &&*/ shooting == true  && bulletsLeft > 0)
+        if (reloadAnimationIsPlaying == false && shooting == true  && bulletsLeft > 0)
         {
             if(Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -119,22 +119,31 @@ public class Shooting : MonoBehaviour
             }
             
         }
-        //if (/*readyToShoot && shooting &&*/ FullAuto == true && !reloading && bulletsLeft > 0)
-        //{
-        //    if (Input.GetKey(KeyCode.Mouse0))
-        //    {
-        //        //Set bullets shot to 0
-        //        bulletsShot = 0;
-        //        Shoot();
-        //    }
+        //FullAutoShooting
+        if (reloadAnimationIsPlaying == false && shooting == true && FullAuto == true && bulletsLeft > 0)
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                timeBetweenShooting -= Time.deltaTime;
 
-        //}
+                if ( timeBetweenShooting <= 0.0f )
+                {
+                    //Set bullets shot to 0
+                    bulletsShot = 0;
+                    Shoot();
+
+                    // reset the timer
+                    timeBetweenShooting = timeBetweenShots;
+                }
+            }
+
+        }
 
         //Reload
         //按弹夹换弹
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && reloading == true )
         {
-            SCAR.animator.SetTrigger("Rechange");
+            //SCAR.animator.SetTrigger("Rechange");
             PMAG = magazineSize - bulletsLeft;
             Reload();
 
@@ -142,7 +151,7 @@ public class Shooting : MonoBehaviour
         //automatic reload when no ammo， 自动没子弹换弹
         if(  bulletsLeft <= 0 && reloading == true)
         {
-            SCAR.animator.SetTrigger("Rechange");
+            //SCAR.animator.SetTrigger("Rechange");
             PMAG = magazineSize - bulletsLeft;
             Reload();
             
@@ -220,10 +229,12 @@ public class Shooting : MonoBehaviour
         allowInvoke = true;
     }
     private void Reload()
-    {   
-        
-        
+    {
+
+        SCAR.animator.SetTrigger("Rechange");
         //Invoke("ReloadFinished", reloadTime);
+
+        reloadAnimationIsPlaying = true;
 
         bulletsLeft = magazineSize;
 
@@ -240,10 +251,22 @@ public class Shooting : MonoBehaviour
             magazineTotal -= PMAG;
         }
 
+        StartCoroutine(reloadSequence());
+
     }
+
+    private IEnumerator reloadSequence()
+    {
+        yield return new WaitForSeconds(reloadDuration);
+
+        // set boolean to false
+        reloadAnimationIsPlaying = false;
+    }
+   
+
     //private void ReloadFinished() //只记录弹夹
     //{
-        
+
     //    if (bulletsLeft == 0)
     //    {
     //        magazineTotal -= magazineSize;
@@ -252,6 +275,6 @@ public class Shooting : MonoBehaviour
     //    {
     //        magazineTotal -= PMAG -= bulletsLeft;
     //    }
-        
+
     //}
 }

@@ -17,12 +17,19 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "enemy")
-        {
+        zombie1 zombie1Script = other.GetComponentInParent<zombie1>();
 
+        if (zombie1Script != null)
+        {
+            zombie1Script.TakeDamageNow(other);
            //gameoverappear.SetActive(true);
 
            Debug.Log("Bullet Hit!");
         }
+
+
+
+
+
     }
 }

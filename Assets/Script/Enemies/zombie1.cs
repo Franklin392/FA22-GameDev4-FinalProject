@@ -8,6 +8,9 @@ public class zombie1 : MonoBehaviour
 
     public Animator animator;
 
+    public Collider bodyCollider;
+    public Collider headCollider;
+
     // AIÐÐ¶¯
     NavMeshAgent thisNavMeshAgent;
     public enemyState currentState;
@@ -20,12 +23,12 @@ public class zombie1 : MonoBehaviour
 
     //Health
     public float Health;
-    public float injury;
+    public float injury, headinjury;
     //die time
     public float DieTime;
     public enum enemyState
     {
-        ChaseNow,Attack,Die,LoseHealth,Stop
+        ChaseNow,Attack,Die,LoseBodyHealth, LoseHeadHealth,Stop
     }
     void Start()
     {
@@ -54,8 +57,12 @@ public class zombie1 : MonoBehaviour
             case enemyState.Die:
                 Die();
                 break;
-            case enemyState.LoseHealth:
-                LoseHealth();
+
+            case enemyState.LoseBodyHealth:
+                LoseBodyHealth();
+                break;
+            case enemyState.LoseHeadHealth:
+                LoseHeadHealth();
                 break;
 
             case enemyState.Stop:
@@ -138,10 +145,15 @@ public class zombie1 : MonoBehaviour
         
         
     }
-    public void LoseHealth()
+    public void LoseBodyHealth()
     {
         Health -= injury;
     }
+    public void LoseHeadHealth()
+    {
+        Health -= headinjury;
+    }
+
 
     public void Stop()
     {
@@ -149,6 +161,27 @@ public class zombie1 : MonoBehaviour
         animator.SetTrigger("Stop");
     }
 
+    public void TakeDamageNow(Collider hitCollider)
+    {
+        if (hitCollider == headCollider)
+        {
+            currentState = enemyState.LoseHeadHealth;
+            Debug.Log("HEADSHOT WOW");
+            
+        }
+
+        if (hitCollider == bodyCollider)
+        {
+            currentState = enemyState.LoseBodyHealth;
+            Debug.Log("bodySHOT WOW");
+
+        }
+
+        //currentState = enemyState.LoseHealth;
+        //animator.SetTrigger("GetHit");
+    }
+
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "bullet")
@@ -156,7 +189,7 @@ public class zombie1 : MonoBehaviour
             currentState = enemyState.LoseHealth;
             animator.SetTrigger("GetHit");
         }
-    }
+    }*/
 
     private void OnTriggerExit(Collider other)
     {
