@@ -29,7 +29,7 @@ public class PlayerShooting : MonoBehaviour
         bulletsLeft = magazineSize;
         readyToShoot = true;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         MyInput();
 

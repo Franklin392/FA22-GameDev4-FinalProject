@@ -34,7 +34,7 @@ public class FlyingGirl1 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         dist = Vector3.Distance(Player.position, transform.position);
         switch (currentState)

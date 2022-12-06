@@ -1341,6 +1341,7 @@ GameObject:
   - component: {fileID: 6546788149212380560}
   - component: {fileID: 7827009992447756243}
   - component: {fileID: 151371362750173678}
+  - component: {fileID: 8895675206500220517}
   m_Layer: 0
   m_Name: Fat_Zombie 1
   m_TagString: Untagged
@@ -1399,12 +1400,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  bodyCollider: {fileID: 7827009992447756243}
+  headCollider: {fileID: 8895675206500220517}
   currentState: 0
   dist: 0
   MaxDistance: 6
+  ChaseDistance: 0
   Player: {fileID: 0}
-  Health: 30
+  Health: 27
   injury: 2
+  headinjury: 5
   DieTime: 5
 --- !u!195 &6546788149212380560
 NavMeshAgent:
@@ -1439,8 +1444,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7492983, y: 2.5522192, z: 1}
-  m_Center: {x: -0.038727682, y: 0.77610624, z: 0}
+  m_Size: {x: 1.4693292, y: 1.2813481, z: 1}
+  m_Center: {x: -0.07413306, y: 0.70627016, z: 0}
 --- !u!54 &151371362750173678
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1457,6 +1462,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &8895675206500220517
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853314855081812}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.7003722, z: 1}
+  m_Center: {x: 0, y: 1.7241548, z: 0}
 --- !u!1 &1866039069110316
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ public class PlayerMotor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         isGrounded = controller.isGrounded;//
 
@@ -43,7 +43,7 @@ public class PlayerMotor : MonoBehaviour
             
 
         controller.Move(playerVelocity * Time.deltaTime);
-        Debug.Log(playerVelocity.y);
+        //Debug.Log(playerVelocity.y);
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

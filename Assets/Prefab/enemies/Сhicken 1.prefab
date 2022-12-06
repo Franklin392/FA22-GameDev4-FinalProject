@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 7428129906548240843}
   - component: {fileID: 4720458744136527367}
   - component: {fileID: 1225693842194689670}
+  - component: {fileID: 2323598608257189337}
   m_Layer: 0
   m_Name: "\u0421hicken 1"
   m_TagString: Untagged
@@ -491,13 +492,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  bodyCollider: {fileID: 1225693842194689670}
+  headCollider: {fileID: 2323598608257189337}
   currentState: 0
   dist: 0
   MaxDistance: 6
   ChaseDistance: 15
   Player: {fileID: 0}
-  Health: 10
+  Health: 6
   injury: 2
+  headinjury: 3
   DieTime: 5
 --- !u!54 &7428129906548240843
 Rigidbody:
@@ -525,7 +529,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 6
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -548,8 +552,22 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.0007975, z: 1}
-  m_Center: {x: 0, y: 1.0179921, z: 0}
+  m_Size: {x: 1, y: 1.1258681, z: 1}
+  m_Center: {x: 0, y: 0.72405386, z: 0}
+--- !u!136 &2323598608257189337
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580797401444486}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.36
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.58, z: 0}
 --- !u!1 &1584781677987190
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class ChickenZombie : MonoBehaviour
 {
     public Animator animator;
 
+    public Collider bodyCollider;
+    public Collider headCollider;
     // AIÐÐ¶¯
     NavMeshAgent thisNavMeshAgent;
     public enemyState currentState;
@@ -19,12 +21,12 @@ public class ChickenZombie : MonoBehaviour
 
     //Health
     public float Health;
-    public float injury;
+    public float injury, headinjury;
     //die time
     public float DieTime;
     public enum enemyState
     {
-        ChaseNow, Attack, Die, LoseHealth, Stop
+        ChaseNow, Attack, Die, LoseBodyHealth, LoseHeadHealth, Stop
     }
     void Start()
     {
@@ -37,7 +39,7 @@ public class ChickenZombie : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         dist = Vector3.Distance(Player.position, transform.position);
 
@@ -53,8 +55,12 @@ public class ChickenZombie : MonoBehaviour
             case enemyState.Die:
                 Die();
                 break;
-            case enemyState.LoseHealth:
-                LoseHealth();
+
+            case enemyState.LoseBodyHealth:
+                LoseBodyHealth();
+                break;
+            case enemyState.LoseHeadHealth:
+                LoseHeadHealth();
                 break;
 
             case enemyState.Stop:
@@ -132,9 +138,13 @@ public class ChickenZombie : MonoBehaviour
 
 
     }
-    public void LoseHealth()
+    public void LoseBodyHealth()
     {
         Health -= injury;
+    }
+    public void LoseHeadHealth()
+    {
+        Health -= headinjury;
     }
 
     public void Stop()
@@ -144,19 +154,23 @@ public class ChickenZombie : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    public void TakeDamageNow(Collider hitCollider)
     {
-        if (other.gameObject.tag == "bullet")
+        if (hitCollider == headCollider)
         {
-            currentState = enemyState.LoseHealth;
-            animator.SetTrigger("GetHit");
+            currentState = enemyState.LoseHeadHealth;
+            Debug.Log("HEADSHOT WOW");
+
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
+        if (hitCollider == bodyCollider)
+        {
+            currentState = enemyState.LoseBodyHealth;
+            Debug.Log("bodySHOT WOW");
 
+        }
 
-
+        //currentState = enemyState.LoseHealth;
+        //animator.SetTrigger("GetHit");
     }
 }
