@@ -1623,7 +1623,7 @@ MonoBehaviour:
   Bullet: {fileID: 8300000, guid: 2a3aadc0f05b4aa46a67b4bc8299b8ba, type: 3}
   fireRate: 10
   nextFire: 1
-  SCAR: {fileID: 0}
+  SCAR: {fileID: 4797105543687185790}
 --- !u!65 &2651369783049903773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1801,7 +1801,7 @@ MonoBehaviour:
   speed: 5
   gravity: -9.8
   jumpHeight: 1.5
-  SCAR: {fileID: 0}
+  SCAR: {fileID: 4797105543687185790}
 --- !u!114 &2651369783178666660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7222,7 +7222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ae065689647854687f9e0def3e5a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 4883353589653558095}
 --- !u!1 &4797112237867432193
 GameObject:
   m_ObjectHideFlags: 0

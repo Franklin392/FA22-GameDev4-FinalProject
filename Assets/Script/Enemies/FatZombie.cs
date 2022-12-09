@@ -139,6 +139,7 @@ public class FatZombie : MonoBehaviour
 
 
     }
+    //Normal Damage
     public void LoseBodyHealth()
     {
         Health -= injury;
