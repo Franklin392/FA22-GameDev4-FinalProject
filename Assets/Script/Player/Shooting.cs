@@ -262,7 +262,7 @@ public class Shooting : MonoBehaviour
         // set boolean to false
         reloadAnimationIsPlaying = false;
     }
-   
+
 
     //private void ReloadFinished() //Ö»¼ÇÂ¼µ¯¼Ð
     //{
@@ -277,4 +277,11 @@ public class Shooting : MonoBehaviour
     //    }
 
     //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "AmmoBox")
+        {
+            magazineTotal = 300;
+        }
+    }
 }

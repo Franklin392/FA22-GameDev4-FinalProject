@@ -8,13 +8,16 @@ public class AmmoBox : MonoBehaviour
     public float angle;
     public float Lean;
 
-    public Shooting player;
+    
     void LateUpdate() //每一帧，先update，然后是animation，之后才是lateupdate 
-    {
+    {   
         Lean = Mathf.Sin(Time.time * speed);
 
         transform.Rotate(Vector3.left * Lean * angle, Space.Self);
         transform.Rotate(Vector3.up * Lean * angle, Space.Self);
+
+
+        
         //Space:changing self mode or Local mode
         //UP left right// Sin give -1 to 1, *60 让他变更大角度//up and down// 5.0f = how fast   60.f= 范围 （-60-  +60）LIKE MOVING ANGLE
 
@@ -23,15 +26,15 @@ public class AmmoBox : MonoBehaviour
     }
     private void Start()
     {
-
+      
     }
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.gameObject.tag == "Player")
         {
-            player.magazineTotal = 300;
-            Debug.Log("Got Ammo");
+            
+            //Debug.Log("Got Ammo");
         }
     }
 }

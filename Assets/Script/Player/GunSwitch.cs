@@ -148,5 +148,6 @@ public class GunSwitch : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+
     }
 }

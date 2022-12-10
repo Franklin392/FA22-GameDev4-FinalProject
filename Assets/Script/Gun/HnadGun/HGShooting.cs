@@ -221,6 +221,12 @@ public class HGShooting : MonoBehaviour
         reloadAnimationIsPlaying = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "AmmoBox")
+        {
+            magazineTotal = 60;
+        }
+    }
 
-   
 }

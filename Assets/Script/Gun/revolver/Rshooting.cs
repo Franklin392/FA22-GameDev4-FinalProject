@@ -220,5 +220,13 @@ public class Rshooting : MonoBehaviour
         // set boolean to false
         reloadAnimationIsPlaying = false;
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.tag == "AmmoBox")
+        {
+            magazineTotal = 48;
+            Debug.Log("Revovloer have ammo");
+        }
+    }
 }

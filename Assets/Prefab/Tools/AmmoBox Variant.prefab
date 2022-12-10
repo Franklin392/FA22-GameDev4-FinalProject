@@ -287,6 +287,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmmoBox Variant
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 45fb3b613218da844b047d1f9349e0d6,
+        type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45fb3b613218da844b047d1f9349e0d6, type: 3}
 --- !u!1 &4311850712798567632 stripped
@@ -358,4 +363,4 @@ MonoBehaviour:
   speed: 0.0001
   angle: 20
   Lean: 0
-  player: {fileID: 0}
+  GunHolder: {fileID: 0}
