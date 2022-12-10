@@ -22,7 +22,7 @@ public class PlayerInteract : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         playerUI.UpdateText(string.Empty);
 

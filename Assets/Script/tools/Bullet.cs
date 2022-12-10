@@ -5,18 +5,22 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float life = 20;
+    public GameObject Blood;
     private void Awake()
     {
         Destroy(gameObject, life);
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        Blood.SetActive(false);
+    }
     void Update()
     {
         
     }
     private void OnTriggerEnter(Collider other)
-    {
+    {  
         zombie1 zombie1Script = other.GetComponentInParent<zombie1>();
         FatZombie FatBody = other.GetComponentInParent<FatZombie>();
         ChickenZombie ChickenBody = other.GetComponentInParent<ChickenZombie>();
@@ -24,6 +28,7 @@ public class Bullet : MonoBehaviour
 
         if (zombie1Script != null)
         {
+            Blood.SetActive(true);
             zombie1Script.TakeDamageNow(other);
            //gameoverappear.SetActive(true);
 
@@ -31,6 +36,7 @@ public class Bullet : MonoBehaviour
         }
         if (FatBody != null)
         {
+            Blood.SetActive(true);
             FatBody.TakeDamageNow(other);
             //gameoverappear.SetActive(true);
 
@@ -38,6 +44,7 @@ public class Bullet : MonoBehaviour
         }
         if (ChickenBody != null)
         {
+            Blood.SetActive(true);
             ChickenBody.TakeDamageNow(other);
             //gameoverappear.SetActive(true);
 
@@ -45,6 +52,7 @@ public class Bullet : MonoBehaviour
         }
         if (TankBody != null)
         {
+            Blood.SetActive(true);
             TankBody.TakeDamageNow(other);
             //gameoverappear.SetActive(true);
 
