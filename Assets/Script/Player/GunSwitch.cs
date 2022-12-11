@@ -8,6 +8,7 @@ public class GunSwitch : MonoBehaviour
     public GameObject pistol;
     public GameObject Axe;
     public GameObject revolver;
+    public GameObject MP5;
 
 
 
@@ -16,11 +17,13 @@ public class GunSwitch : MonoBehaviour
     public bool ScarBool;
     public bool AXE;
     public bool R;
+    public bool MP5bool;
 
     //是否装备Bool
     public bool haveScar;
     public bool haveHandGun;
     public bool haveR;
+    public bool haveMP5;
     //public bool have;
     //public bool haveR;
     //public bool haveR;
@@ -91,21 +94,58 @@ public class GunSwitch : MonoBehaviour
             revolver.SetActive(false);
         }
 
-    //--------------------------------------------------------------------------------------------------------------------
-
-        //主武器按键
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        // MP5
+        if (    MP5bool == true)
         {
-            ScarBool = true;
+            MP5.SetActive(true);
+        }
+        else
+        {
+            MP5.SetActive(false);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------------
+
+        //主武器按键 primary weapon
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {   
+            //first weapon
+
+            //ScarBool = true;
+            if (haveScar == true)
+            {
+                ScarBool = true;
+                haveMP5 = false;
+
+            }
+            else
+            {
+                ScarBool = false;
+                haveMP5 = true;
+            }
+            //是否有左轮
+            if (haveMP5 == true)
+            {
+                MP5bool = true;
+                handgunBool = false;
+            }
+            else
+            {
+                MP5bool = false;
+                handgunBool = true;
+            }
 
 
+
+            //SECOND WEAPON
             handgunBool = false;
             R = false;
+            //third weapon
             AXE = false;
 
         }
 
-        //副武器按键
+        //副武器按键 secondary weapon 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
           
@@ -136,7 +176,7 @@ public class GunSwitch : MonoBehaviour
             }
         }
 
-        //近战按键
+        //近战按键 third close weapon
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             AXE = true;
