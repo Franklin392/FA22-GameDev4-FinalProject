@@ -25,9 +25,25 @@ public class FatZombie : MonoBehaviour
     public float injury, headinjury;
     //die time
     public float DieTime;
+    //Bloods
+    public GameObject Blood;
+    public GameObject HeadBlood;
+    public Transform BodyBlood;
+    public Transform HeadBloodyHell;
+    //Score
+    public int coins;
+    public ScoreManager SM;
+
     public enum enemyState
     {
         ChaseNow, Attack, Die, LoseBodyHealth, LoseHeadHealth,Stop
+    }
+    private void Awake()
+    {
+        //找积分系统
+        SM = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        //find player
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Start()
     {
@@ -35,7 +51,10 @@ public class FatZombie : MonoBehaviour
 
         //动画
         animator = GetComponent<Animator>();
-
+        ////找积分系统
+        //SM = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        ////find player
+        //Player = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
 
@@ -134,6 +153,8 @@ public class FatZombie : MonoBehaviour
 
         if (DieTime <= 0)
         {
+            coins += 20;
+            SM.AddCoinPoint2();
             Destroy(gameObject);
         }
 
@@ -143,10 +164,13 @@ public class FatZombie : MonoBehaviour
     public void LoseBodyHealth()
     {
         Health -= injury;
+        //暴血！
+        Instantiate(Blood, BodyBlood.position, Quaternion.identity);
     }
     public void LoseHeadHealth()
     {
         Health -= headinjury;
+        Instantiate(HeadBlood, HeadBloodyHell.position, Quaternion.identity);
     }
 
     public void Stop()

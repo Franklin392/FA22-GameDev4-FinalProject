@@ -30,7 +30,7 @@ public class MP5Shooting : MonoBehaviour
 
     //Graphic
     public GameObject muzzleFlash;
-    public TextMeshProUGUI ammunitionDisplay;
+    public TextMeshProUGUI ammunitionDisplay,FireMode;
 
     //ShootSound
     public AudioSource Shot;

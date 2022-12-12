@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 3157595600229970294}
   m_Layer: 0
   m_Name: Thak 1
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -855,6 +855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 10
+  Blood: {fileID: 0}
 --- !u!1 &7231574760198156414
 GameObject:
   m_ObjectHideFlags: 0

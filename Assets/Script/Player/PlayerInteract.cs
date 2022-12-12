@@ -12,6 +12,9 @@ public class PlayerInteract : MonoBehaviour
 
     private PlayerUI playerUI;
     public InputManager inputManager;
+
+    public int coins;
+    public ScoreManager SM;
     void Start()
     {
         cam = GetComponent<PlayerLook>().cam;
@@ -50,4 +53,33 @@ public class PlayerInteract : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+     
+        if (other.gameObject.tag == "Coins")
+        {
+
+            other.gameObject.SetActive(false);
+            Debug.Log("GetCOins");
+            coins += 20;
+            SM.AddCoinPoint4();
+        }
+        if (other.gameObject.tag == "BigCoins")
+        {
+
+            other.gameObject.SetActive(false);
+            Debug.Log("GetBigCOins");
+            coins += 50;
+            SM.AddCoinPoint2();
+        }
+        if (other.tag == "AmmoBox")
+        {
+            other.gameObject.SetActive(false);
+        }
+
+        
+        
+    }
+
+
 }

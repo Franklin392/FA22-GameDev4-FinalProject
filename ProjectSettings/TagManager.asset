@@ -15,6 +15,10 @@ TagManager:
   - Bubble
   - AmmoBox
   - Gun
+  - Coins
+  - ScoreManager
+  - Item
+  - Door
   layers:
   - Default
   - TransparentFX

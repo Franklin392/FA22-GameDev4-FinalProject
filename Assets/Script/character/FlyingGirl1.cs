@@ -21,6 +21,8 @@ public class FlyingGirl1 : MonoBehaviour
     public float injury;
     //die time
     public float DieTime;
+
+    public bool AttackBOOL;
     public enum friendlyState
     {
         ChaseNow, Attack, Die, LoseHealth,Stop
@@ -28,7 +30,7 @@ public class FlyingGirl1 : MonoBehaviour
     void Start()
     {
         thisNavMeshAgent = GetComponent<NavMeshAgent>();
-
+        AttackBOOL = false;
         //¶¯»­
         animator = GetComponent<Animator>();
     }
@@ -62,7 +64,7 @@ public class FlyingGirl1 : MonoBehaviour
             currentState = friendlyState.Die;
         }
 
-        if (dist <= MaxDistance)
+        if (dist <= MaxDistance )
         {
             currentState = friendlyState.Stop;
             Debug.Log(" Girl no more chase BOY ");
@@ -70,8 +72,19 @@ public class FlyingGirl1 : MonoBehaviour
         }
         else
         {
-            currentState = friendlyState.ChaseNow;
+           
+
+                currentState = friendlyState.ChaseNow;
+            
         }
+
+       
+
+        //if (dist >= MaxDistance && AttackBOOL == false)
+        //{
+        //    currentState = friendlyState.ChaseNow;
+
+        //}
     }
     public void ChaseNow()
     {
@@ -81,15 +94,29 @@ public class FlyingGirl1 : MonoBehaviour
         Debug.Log(" chasing player now ");
         thisNavMeshAgent.SetDestination(targetBObject.transform.position);
 
-        animator.SetTrigger("Walk");
-       
+        
+
+        if (AttackBOOL == true)
+        {
+            animator.SetTrigger("Attack");
+        }
+        else
+        {
+            animator.SetTrigger("Walk");
+        }
 
     }
     public void Attack()
     {
         animator.SetTrigger("Attack");
 
+        //if (dist >= MaxDistance )
+        //{
+        //    AttackBOOL = false;
+        //    currentState = friendlyState.ChaseNow;
+        //    Debug.Log(" Girl no more chase BOY ");
 
+        //}
     }
 
     public void LoseHealth()
@@ -100,6 +127,17 @@ public class FlyingGirl1 : MonoBehaviour
     {
         thisNavMeshAgent.isStopped = true;
         animator.SetTrigger("Stand");
+
+        if (AttackBOOL == true)
+        {
+            animator.SetTrigger("Attack");
+        }
+        else
+        {
+            animator.SetTrigger("Stand");
+
+        }
+
     }
     public void Die()
     {
@@ -124,12 +162,17 @@ public class FlyingGirl1 : MonoBehaviour
         {
             currentState = friendlyState.LoseHealth;
         }
+
+        if (other.gameObject.tag == "enemy")
+        {
+            AttackBOOL = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
 
-
+        
 
     }
 }

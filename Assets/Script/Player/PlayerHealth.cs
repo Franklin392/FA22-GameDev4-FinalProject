@@ -107,6 +107,8 @@ public class PlayerHealth : MonoBehaviour
         {
             RestoreHealth(60);
             Debug.Log("Get Back Health");
+
+            //other.gameObject.SetActive(false);
         }
     }
 

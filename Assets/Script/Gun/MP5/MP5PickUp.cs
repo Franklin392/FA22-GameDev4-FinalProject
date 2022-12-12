@@ -28,13 +28,13 @@ public class MP5PickUp : Interactable
         {
             if (PickUp == true) //如果可以拾取
             {
-                gunswitch.haveR = true;  //那么拥有枪b
-                gunswitch.haveHandGun = false; //失去枪a
+                gunswitch.haveMP5 = true;  //那么拥有枪b
+                gunswitch.haveScar = false; //失去枪a
 
-                if (gunswitch.handgunBool == true) //如果此时有枪a
+                if (gunswitch.ScarBool == true) //如果此时有枪a
                 {
-                    gunswitch.R = true;   //就让枪B激活
-                    gunswitch.handgunBool = false;
+                    gunswitch.MP5bool = true;   //就让枪B激活
+                    gunswitch.ScarBool = false;
                 }
 
 

@@ -10,7 +10,12 @@ public class CloseAttack : MonoBehaviour
     {
         
     }
+    private void Awake()
+    {
 
+        //find player
+        playerhealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+    }
     // Update is called once per frame
     void Update()
     {

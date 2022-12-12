@@ -26,9 +26,24 @@ public class zombie1 : MonoBehaviour
     public float injury, headinjury;
     //die time
     public float DieTime;
+    //Bloods
+    public GameObject Blood;
+    public GameObject HeadBlood;
+    public Transform BodyBlood;
+    public Transform HeadBloodyHell;
+    //Score
+    public int coins;
+    public ScoreManager SM;
     public enum enemyState
     {
         ChaseNow,Attack,Die,LoseBodyHealth, LoseHeadHealth,Stop
+    }
+    private void Awake()
+    {
+        //找积分系统
+        SM = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        //find player
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Start()
     {
@@ -37,12 +52,18 @@ public class zombie1 : MonoBehaviour
         //动画
         animator = GetComponent<Animator>();
 
-        
+
+        ////find player
+        //Player = GameObject.FindGameObjectWithTag("Player").transform;
+        ////找积分系统
+        //SM = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
-    {
+    {   
+
         dist = Vector3.Distance(Player.position, transform.position);
 
 
@@ -137,21 +158,30 @@ public class zombie1 : MonoBehaviour
         DieTime -=1 * Time.deltaTime;
 
         thisNavMeshAgent.isStopped = true;
+       
 
         if (DieTime <= 0)
         {
+            coins += 20;
+            SM.AddCoinPoint();
             Destroy(gameObject);
+            //add score
+          
         }
-        
-        
+
+        //Instantiate(Coins, transform.position, Quaternion.identity);
+
     }
     public void LoseBodyHealth()
     {
         Health -= injury;
+        //暴血！
+        Instantiate(Blood, BodyBlood.position, Quaternion.identity);
     }
     public void LoseHeadHealth()
     {
         Health -= headinjury;
+        Instantiate(HeadBlood, HeadBloodyHell.position, Quaternion.identity);
     }
 
 
