@@ -39,12 +39,13 @@ public class GunSwitch : MonoBehaviour
 
 
         revolver.SetActive(false);
+        MP5.SetActive(false);
 
         ScarBool = true;
         AXE = false;
         handgunBool = false;
         R = false;
-
+        MP5bool = false;
         //初始装备：有scar 和 手枪 
         haveHandGun = true;
         haveScar = true;
@@ -127,12 +128,12 @@ public class GunSwitch : MonoBehaviour
             if (haveMP5 == true)
             {
                 MP5bool = true;
-                handgunBool = false;
+                ScarBool = false;
             }
             else
             {
                 MP5bool = false;
-                handgunBool = true;
+               ScarBool = true;
             }
 
 
@@ -150,6 +151,7 @@ public class GunSwitch : MonoBehaviour
         {
           
             ScarBool = false;
+            MP5bool = false;
             AXE = false;
             //是否有手枪
             if(haveHandGun == true)
@@ -183,7 +185,7 @@ public class GunSwitch : MonoBehaviour
 
             ScarBool = false;
             handgunBool = false;
-            
+            MP5bool = false;
         }
     }
     private void OnTriggerEnter(Collider other)

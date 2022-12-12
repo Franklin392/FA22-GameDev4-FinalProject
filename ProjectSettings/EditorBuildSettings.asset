@@ -8,13 +8,22 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/GameStartMenu.unity
+    guid: b0977b26ebedbf54faf2d9ff30b37655
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/LevelSelect.unity
+    guid: e4868da85b7a4b6449ba074ee9c4dbb0
   - enabled: 1
     path: Assets/Scenes/KawaiiCity 1.unity
     guid: 7f9d02ed2ef3b34428fb19caea648963
+  - enabled: 1
+    path: Assets/Scenes/survive 1.unity
+    guid: a3e9a4d9f8a9d414db99d01f643f1798
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

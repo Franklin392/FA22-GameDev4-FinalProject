@@ -7,6 +7,6 @@ public class RestartL1 : MonoBehaviour
 {
     public void LoadGame1()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }

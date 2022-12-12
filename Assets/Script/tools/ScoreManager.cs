@@ -14,6 +14,8 @@ public class ScoreManager : MonoBehaviour
     //计分器
     public int score = 0;
 
+    public bool CanBuy;
+
     //计时器
     //public GameObject TextTime;
     //public int TimeLeft = 80;
@@ -36,12 +38,19 @@ public class ScoreManager : MonoBehaviour
 
         //TextTime.GetComponent<Text>().text = "Time Left:" + TimeLeft;
         //StartCoroutine(TimerTake());
-
+        score = 2000;
 
     }
     void Update()
     {
-        
+        if(score > 0)
+        {
+            CanBuy = true;
+        }
+        else
+        {
+            CanBuy = false;
+        }
 
     }
     public void AddCoinPoint()
@@ -64,15 +73,23 @@ public class ScoreManager : MonoBehaviour
         score += 100;
         scoreText.text = score.ToString() + "Points";
     }
-    //public void ResetRotation()
-    //{
-    //    Reset.SetActive(true);
-    //    Debug.Log("Reset");
+    public void BuyAmmo()
+    {   
+        if(CanBuy == true)
+        {
+            score -= 50;
+            scoreText.text = score.ToString() + "Points";
+        }
+        
+    }
+    public void BuyHealth()
+    {
+        if (CanBuy == true)
+        {
+            score -= 100;
+            scoreText.text = score.ToString() + "Points";
+        }
 
-    //}
-    //public void FalseReset()
-    //{
-    //    Reset.SetActive(false);
-    //}
+    }
 
 }
