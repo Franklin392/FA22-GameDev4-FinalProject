@@ -40,6 +40,8 @@ public class Shooting : MonoBehaviour
 
     //Gun animate
     public SCARanimation SCAR;
+
+    public TextMeshProUGUI FireModetext;
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -96,12 +98,14 @@ public class Shooting : MonoBehaviour
             if(FullAuto == true)
             {
                 FullAuto = false;
+                FireModetext.text = "FireMode:  " + "SemiAuto";
                 Debug.Log("Switch to SemiAuto");
 
             }
             else
             {
                 FullAuto = true;
+                FireModetext.text = "FireMode:  " + "FullAuto";
                 Debug.Log("Switch to fullauto");
             }
             

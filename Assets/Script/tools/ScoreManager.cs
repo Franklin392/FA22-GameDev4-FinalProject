@@ -32,13 +32,13 @@ public class ScoreManager : MonoBehaviour
     {
 
         //Reset.SetActive(false);
-
+        score = 2000;
         scoreText.text = score.ToString() + "Points";
 
 
         //TextTime.GetComponent<Text>().text = "Time Left:" + TimeLeft;
         //StartCoroutine(TimerTake());
-        score = 2000;
+        
 
     }
     void Update()
@@ -73,6 +73,40 @@ public class ScoreManager : MonoBehaviour
         score += 100;
         scoreText.text = score.ToString() + "Points";
     }
+
+    public void BuyMP5()
+    {
+        if (CanBuy == true)
+        {
+            score -= 200;
+            scoreText.text = score.ToString() + "Points";
+        }
+    }
+    public void Buyrevolver()
+    {
+        if (CanBuy == true)
+        {
+            score -= 80;
+            scoreText.text = score.ToString() + "Points";
+        }
+    }
+    public void BuySCAR()
+    {
+        if (CanBuy == true)
+        {
+            score -= 150;
+            scoreText.text = score.ToString() + "Points";
+        }
+    }
+    public void BuyHandGun()
+    {
+        if (CanBuy == true)
+        {
+            score -= 100;
+            scoreText.text = score.ToString() + "Points";
+        }
+    }
+
     public void BuyAmmo()
     {   
         if(CanBuy == true)

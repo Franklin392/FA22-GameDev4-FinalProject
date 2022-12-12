@@ -39,7 +39,7 @@ public class MP5PickUp : Interactable
 
 
                 Destroy(gameObject);
-                Debug.Log("U can use revolver now");
+                Debug.Log("U can use MP5 now");
 
             }
         }

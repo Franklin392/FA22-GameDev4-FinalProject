@@ -9,6 +9,15 @@ public class ShopSystem : Interactable
     public GameObject HealthBag;
     public GameObject ammoBag;
 
+    public Transform Gun;
+
+    public GameObject PREFABhealth;
+    public GameObject PREFABammo;
+    public GameObject PREFABmp5;
+    public GameObject PREFABhandgun;
+    public GameObject PREFABscar;
+    public GameObject PREFABrevolver;
+
     public bool CanBuyNOW;
     void Start()
     {
@@ -18,6 +27,9 @@ public class ShopSystem : Interactable
         ammoBag.SetActive(false);
 
         CanBuyNOW = false;
+
+        Transform Ammo = ammoBag.transform;
+        Transform Health = HealthBag.transform;
     }
 
     // Update is called once per frame
@@ -38,6 +50,34 @@ public class ShopSystem : Interactable
                 BuyHealth();
 
             }
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                Debug.Log("buy mp5");
+                BuyMP5();
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                Debug.Log("buy revolver");
+                Buyrevolver();
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                Debug.Log("buy handgun");
+                BuyHandGun();
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.Log("buy SCAR");
+                BuySCAR();
+
+            }
         }
        
     }
@@ -55,20 +95,49 @@ public class ShopSystem : Interactable
     }
     public void BuyMP5()
     {
+        ScoreGet.BuyMP5();
+        Instantiate(PREFABmp5, Gun.position, Gun.rotation);
+
+
 
     }
     public void Buyrevolver()
     {
+        ScoreGet.Buyrevolver();
+        Instantiate(PREFABrevolver, Gun.position, Gun.rotation);
+
+    }
+    public void BuySCAR()
+    {
+        ScoreGet.BuySCAR();
+        Instantiate(PREFABscar, Gun.position, Gun.rotation);
+
+
+
+
+    }
+    public void BuyHandGun()
+    {
+        ScoreGet.BuyHandGun();
+        Instantiate(PREFABhandgun, Gun.position, Gun.rotation);
+
+
+
+
 
     }
     public void BuyAmmo()
     {
         ScoreGet.BuyAmmo();
         HealthBag.SetActive(true);
+        Transform Health = HealthBag.transform;
+        Instantiate(PREFABammo, Health.position, Health.rotation);
     }
     public void BuyHealth()
     {
         ScoreGet.BuyHealth();
         ammoBag.SetActive(true);
+        Transform Ammo = ammoBag.transform;
+        Instantiate(PREFABhealth, Ammo.position, Ammo.rotation);
     }
 }

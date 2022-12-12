@@ -39,7 +39,9 @@ public class MP5Shooting : MonoBehaviour
     public float fireRate, nextFire;
 
     //Gun animate
-    public MP5animate MP5animate; 
+    public MP5animate MP5animate;
+
+    public TextMeshProUGUI FireModetext;
     private void Awake()
     {
         bulletsLeft = magazineSize;
@@ -101,12 +103,14 @@ public class MP5Shooting : MonoBehaviour
             if (FullAuto == true)
             {
                 FullAuto = false;
+                FireModetext.text = "FireMode:  " + "SemiAuto";
                 Debug.Log("Switch to SemiAuto");
 
             }
             else
             {
                 FullAuto = true;
+                FireModetext.text = "FireMode:  " + "FullAuto";
                 Debug.Log("Switch to fullauto");
             }
 
