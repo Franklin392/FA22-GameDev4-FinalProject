@@ -29,13 +29,21 @@ public class TankZombie : MonoBehaviour
     {
         ChaseNow, Attack, Die, LoseBodyHealth, LoseHeadHealth, Stop
     }
+    private void Awake()
+    {
+        //找积分系统
+       
+        //find player
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     void Start()
     {
         thisNavMeshAgent = GetComponent<NavMeshAgent>();
 
         //动画
         animator = GetComponent<Animator>();
-
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
 

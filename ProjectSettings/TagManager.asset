@@ -19,6 +19,7 @@ TagManager:
   - ScoreManager
   - Item
   - Door
+  - PlayerHealth
   layers:
   - Default
   - TransparentFX

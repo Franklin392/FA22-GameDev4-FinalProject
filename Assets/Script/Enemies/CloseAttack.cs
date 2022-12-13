@@ -14,7 +14,7 @@ public class CloseAttack : MonoBehaviour
     {
 
         //find player
-        playerhealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        playerhealth = GameObject.FindGameObjectWithTag("PlayerHealth").GetComponent<PlayerHealth>();
     }
     // Update is called once per frame
     void Update()
